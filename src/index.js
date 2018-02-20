@@ -187,11 +187,13 @@ export default function transformCssModules({ types: t }) {
                     );
 
                     if (thisPluginOptions && thisPluginOptions.keepImport === true) {
+                        const requireValue = value.slice(0, -4) + 'css';
+
                         path.parentPath.replaceWithMultiple([
                             t.expressionStatement(
                               t.callExpression(
                                 t.identifier('require'),
-                                [t.stringLiteral(value)]
+                                [t.stringLiteral(requireValue)]
                               )
                             ),
                             varDeclaration
